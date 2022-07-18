@@ -9,6 +9,7 @@
 body
 {
     font-family: 'Montserrat', sans-serif;
+    background-color: antiquewhite;
 }
 .top
 {
@@ -42,7 +43,6 @@ background: linear-gradient(90deg, rgba(110,247,63,1) 0%, rgba(255,255,255,1) 10
     margin: 10px auto;
     border-radius: 10px;
     padding:30px;
-    background: rgb(29,34,101);
     background: linear-gradient(90deg, rgba(29,34,101,1) 100%, rgba(69,233,12,1) 100%, rgba(15,85,137,1) 100%, rgba(255,0,0,1) 100%);
 }
 h1
@@ -64,19 +64,22 @@ input[type="button"]
     font-size: 22px;
     border-radius: 3px;
     border-radius: 5px;
-    background-image: linear-gradient(to right, #D31027 0%, #EA384D  51%, #D31027  100%);
-    transition: 0.5s;
-    color: white;  
-    box-shadow: 0 0 20px #eee;
+    background: #cbbcf6;
+  transition: all 0.16s ease-in;
 }
          
 
 input[type="button"]:hover {
-    background-position: right center; /* change the direction of the change here */
-    color: #fff;
-    text-decoration: none;
+    background: none;
+    color: #464646;
+    box-shadow: 0 0 0 1px rgba(80, 80, 80, .5);
+    cursor: pointer;
+
   }
- 
+  input[type="button"]:focus
+  {
+    
+  }
 span
 {
     font-size: 25px;

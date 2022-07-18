@@ -16,6 +16,24 @@ let undo= document.querySelector(".undo")
 let un=document.querySelectorAll(".un")
 let thisOver=[];
 let UndoTrack=[];
+let ByeExtra=[];
+let WideExtra=[];
+let LBExtra=[];
+let NbExtra=[];
+let WickExtra=[];
+
+function restart()
+{
+    ov = 0;
+    ball = 0;
+    runs = 0;
+    wickets=0
+    run.textContent = 0;
+    wicket.textContent = 0
+    over.textContent = 0.0;
+    thisOver=[];
+    thisover.textContent=thisOver;
+}
 
 function ovreCounter() {
     if (ball == 6) {
@@ -36,16 +54,6 @@ function ovreCounter() {
     }
 }
 
-function restart()
-{
-    ov = 0;
-    ball = 0;
-    runs = 0;
-    wickets=0
-    run.textContent = 0;
-    wicket.textContent = 0
-    over.textContent = 0.0;
-}
 common.forEach((e) => {
     e.addEventListener('click', () => {
         runs = runs + Number(e.value)
@@ -62,6 +70,14 @@ wdnb.forEach((e) => {
     e.addEventListener('click', () => {
         runs++;
         let extra = Number(prompt("Any Extra Run?? if No, enter 0"))
+        if(e.value=="NB")
+        {
+            NbExtra.push(extra)
+        }
+        else
+        {
+            WideExtra.push(extra)
+        }
         runs += extra
         thisOver.push(e.value)
         thisover.textContent=thisOver;
@@ -73,6 +89,14 @@ wdnb.forEach((e) => {
 lbb.forEach((e) => {
     e.addEventListener('click', () => {
         let extra = Number(prompt("Enter Extra Run??"))
+        if(e.value=="LB")
+        {
+            LBExtra.push(extra)
+        }
+        else if(e.value=="BYE")
+        {
+            ByeExtra.push(extra)
+        }
         runs += extra
         thisOver.push(e.value)
         thisover.textContent=thisOver;
@@ -86,6 +110,10 @@ lbb.forEach((e) => {
 wick.addEventListener('click', () => {
     thisOver.push("OUT")
     thisover.textContent=thisOver;
+    let runout=prompt("Is it a Runout ? Any Extra Run on Out?")
+    WickExtra.push(runout)
+    runs += Number(runout)
+    run.textContent = runs;
     ball++
     ovreCounter()
     wickets++
@@ -116,11 +144,18 @@ undo.addEventListener('click',()=>
         run.textContent = runs;
         ovreCounter()
     }
-
     if(last=="LB" || last=="BYE")
     {
-        runs-=Number(last.extra);
-        console.log(last)
+        if(last=="LB")
+        {
+            let extra=LBExtra.pop();
+            runs-=Number(extra);
+        }
+        else if(last=="BYE")
+        {
+            let extra=ByeExtra.pop();
+            runs-=Number(extra);
+        }
         if(ball>0)
         {ball--;}
         else{
@@ -132,24 +167,37 @@ undo.addEventListener('click',()=>
         run.textContent = runs;
         ovreCounter()
     }
+    if(last=="NB" || last=="WD")
+    {
+        if(last=="NB")
+        {
+            let extra=NbExtra.pop();
+            runs=runs - (Number(extra))-1;
+        }
+        else if(last=="WD")
+        {
+            let extra=WideExtra.pop();
+            runs=runs - (Number(extra))-1;
+        }
+        thisOver.pop();
+        thisover.textContent=thisOver;
+        run.textContent = runs;
+    }
+    if(last=="OUT")
+    {
+        wickets--;
+        wicket.textContent = wickets
+        if(ball>0)
+        {ball--;}
+        else{
+            ov--
+            ball=5
+        }
+        let runExtra=WickExtra.pop()
+        runs-=Number(runExtra);
+        run.textContent = runs;
+        thisOver.pop();
+        thisover.textContent=thisOver;
+        ovreCounter();
+    }
 })
-
-
-
-
-
-
-
-
-
-
-// un.forEach((e)=>
-// {
-//     undo.addEventListener('click',()=>
-//     {
-//         if(e==common)
-//         {
-
-//         }
-//     })
-// })
